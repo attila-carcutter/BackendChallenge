@@ -2,10 +2,10 @@ from flask import Blueprint, make_response
 
 from api.utils.api_decorators import ApiDecorators
 
-api = Blueprint("challenge_api", __name__)
+challenge_api = Blueprint("challenge_api", __name__)
 
 
-@api.route("/challenge", methods=["POST"])
+@challenge_api.route("/challenge", methods=["POST"])
 @ApiDecorators.require_customer_id
 def vehicle_features_post(user_id: str):
     """

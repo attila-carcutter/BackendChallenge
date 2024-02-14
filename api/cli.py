@@ -1,6 +1,6 @@
 import click
 
-from api.applications.api_server import cli as api_server
+from api.api_server import cli as api_server
 
 
 @click.group()

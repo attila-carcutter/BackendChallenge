@@ -2,7 +2,7 @@ import click
 from flask import Flask
 from flask_cors import CORS
 
-from api.core.challenge_api import api as backend_challenge_api
+from api.handlers.backend.challenge import challenge_api
 
 
 @click.group(name="api-server")
@@ -37,5 +37,5 @@ def vehicle_features(host: str, port: int):
     """
     app = Flask("Backend Challenge API")
     CORS(app)
-    app.register_blueprint(backend_challenge_api, url_prefix="/backend")
+    app.register_blueprint(challenge_api, url_prefix="/backend")
     app.run(host=host, port=port, debug=True)
