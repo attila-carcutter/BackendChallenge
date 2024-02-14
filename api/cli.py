@@ -1,6 +1,6 @@
 import click
 
-from applications.api_server import cli as api_server
+from api.applications.api_server import cli as api_server
 
 
 @click.group()
@@ -10,6 +10,3 @@ def cli(ctx):
 
 
 cli.add_command(api_server)
-
-if __name__ == "__main__":
-    cli()

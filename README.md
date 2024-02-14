@@ -1,8 +1,6 @@
-Car Cutter - Backend Challenge
-==========
+# Car Cutter - Backend Challenge
 
-Task
------
+## Task
 
 ### As a backend developer you get the task to implement an API route using Python
 
@@ -16,12 +14,21 @@ This file should be stored to a folder named like the `user_id` and the filename
 
 Once you are done, just create a pull request to `base:develop`. Please leave a comment what you think about the task and how long it took you to finish.
 
-Run It
------
 
-Serve the API route with:
+### Setup
+To get started, install the following system level dependencies:
+- [`python3.7`](https://www.python.org/downloads/)
+- [`direnv`](https://direnv.net/) for managing the development environment
+- [`poetry`](https://python-poetry.org/) for package manager
+
+
+After the dependencies are installed, all you need to do is entering the project with your terminal,
+and running `direnv allow` (see https://direnv.net/).
+
+
+### Running the development server
 ```bash
-$ python src/cli.py api-server vehicle-features
+cli api-server vehicle-features
 ```
 
 By default, the API is now reachable at `http://127.0.0.1:8080/backend/` </br>
@@ -43,34 +50,6 @@ curl --request POST 'http://localhost:8080/backend/challenge' \
 ```
 
 
-Setup
------
-We use Python 3.7 with Flask to run the http server.
-
-
-#### Virtual Environment (API and CLI)
-
-You can use [pyenv](https://github.com/pyenv/pyenv)
-to manage different versions of Python on your local PC.
-
-To complete the setup run the following command inside the repository
-directory. Whenever you enter the repository folder then, `pyenv` will
-automatically use Python 3.7:
-
-```bash
-pyenv install 3.7.13
-pyenv local 3.7.13
-python3 --version  # verify whether we're indeed using Python 3.7
-```
-
-We need a virtual environment for local development.
-Inside the repository directory run:
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-```
 
 Formatting
 ----------

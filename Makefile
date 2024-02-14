@@ -1,10 +1,10 @@
 .PHONY: format
 format:
-	black --line-length=140 .
+	black .
 
 .PHONY: unit-test
 unit-test:
-	coverage run -m pytest tests/unit/
+	pytest tests/unit/
 
 .PHONY: coverage
 coverage: unit-test

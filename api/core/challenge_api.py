@@ -1,5 +1,6 @@
 from flask import Blueprint, make_response
-from utils.api_decorators import ApiDecorators
+
+from api.utils.api_decorators import ApiDecorators
 
 api = Blueprint("challenge_api", __name__)
 
