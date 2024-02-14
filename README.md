@@ -1,5 +1,7 @@
 # Car Cutter - Backend Challenge
 
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
 ## Task
 
 ### As a backend developer you get the task to implement an API route using Python
@@ -47,64 +49,4 @@ or
 curl --request POST 'http://localhost:8080/backend/challenge' \
   --header "Content-Type: application/json" \
   --form data=@json/vehicle-features.v1.example.json
-```
-
-
-
-Formatting
-----------
-
-To format your code before committing run `make format` or
-[integrate black into your IDE](https://black.readthedocs.io/en/stable/integrations/editors.html).
-
-Caveat: Black either puts all function arguments into a single line or
-one argument per line. To split a long line of arguments into several lines,
-you must add a trailing comma *after* the last argument.
-For example, `transform(argument1, argument2,)` will be
-converted to multiple lines by *Black*. The following example on the other hand
-will be collapsed into a single line, because it lacks a trailing comma:
-
-```python
-transform(
-    argument1,
-    argument2
-)
-```
-
-### PyCharm
-
-If you're using PyCharm and you want your files to be auto-formatted on save
-follow these steps:
-
-- Setup the virtualenv environment `venv` as outlined above. *Black* should
-  automatically be installed, because it's listed in `requirements.txt`.
-  As a short-cut (without local development possibility) you can run:
-  `python3 -m venv venv && venv/bin/python install black==22.3.0`
-- Install the [*File Watchers* plugin](https://plugins.jetbrains.com/plugin/7177-file-watchers)
-- In the *File Watchers* plugin, setup black with the following settings:
-  - File Type: Python
-  - Program: `$PyInterpreterDirectory$/black`
-  - Arguments: `--line-length=140 $FilePath$`
-  - Output paths to refresh: `$FilePath$`
-  - Working Directory: `$ProjectFileDir$`
-  - Uncheck "Auto-save edited files to trigger the watcher"
-  - Uncheck "Trigger the watcher on external changes"
-
-
-### VSCode
-
-The repository already contains the required settings for VSCode in
-`.vscode`. If you want to automatically format when you save a file, you
-can additionally enable the setting *Format on Save* in your VSCode.
-
-
-Unit Tests
-----------
-
-Unit tests require the following dependencies: pytest, coverage
-
-```bash
-pip install coverage pytest
-make unit-test
-make coverage
 ```
