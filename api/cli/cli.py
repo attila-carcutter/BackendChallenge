@@ -1,17 +1,15 @@
 import click
-from flask import Flask
-from flask_cors import CORS
 
-from api.handlers.backend.challenge import challenge_api
+from api.create_app import create_app_from_env
 
 
 @click.group(name="api-server")
-def cli():
+def main():
     pass
 
 
 # noinspection HttpUrlsUsage
-@cli.command(name="vehicle-features", help="Generate comparison images.")
+@main.command(name="vehicle-features", help="Generate comparison images.")
 @click.option(
     "--host",
     "host",
@@ -30,12 +28,15 @@ def vehicle_features(host: str, port: int):
     """
     Serves an API with `Flask`.
     http://<host>:<port>/backend/
-
-    Args:
-        host: The hostname to listen on.
-        port: The port of the webserver.
     """
-    app = Flask("Backend Challenge API")
-    CORS(app)
-    app.register_blueprint(challenge_api, url_prefix="/backend")
+    app = create_app_from_env()
     app.run(host=host, port=port, debug=True)
+
+
+@click.group()
+@click.pass_context
+def cli(ctx):  # pragma: no cover
+    ctx.ensure_object(dict)
+
+
+cli.add_command(main)

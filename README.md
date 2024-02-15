@@ -12,7 +12,7 @@ Since this is a pretty simple task, we want you to think of best practices, edge
 Please fork our repo and implement the challenge in `src/core/challenge_api.py`.
 
 Customers will post some json data to this api route, and we want to store each `Vehicle` in the `Vehicle-List` to a single file.
-This file should be stored to a folder named like the `user_id` and the filename should be the `id` with a ".json" extension.
+This file should be stored to a folder named like the `customer_id` and the filename should be the `id` with a ".json" extension.
 
 Once you are done, just create a pull request to `base:develop`. Please leave a comment what you think about the task and how long it took you to finish.
 
@@ -30,7 +30,7 @@ and running `direnv allow` (see https://direnv.net/).
 
 ### Running the development server
 ```bash
-cli api-server vehicle-features
+make run
 ```
 
 By default, the API is now reachable at `http://127.0.0.1:8080/backend/` </br>

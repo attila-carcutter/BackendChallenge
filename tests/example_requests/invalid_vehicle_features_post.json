@@ -1,0 +1,32 @@
+{
+  "vehicle": [
+    {
+      "id": "VIN1",
+      "features": [
+        {
+          "feature": "ENGINE",
+          "description": {
+            "short": "5.2 Liter V8"
+          }
+        }
+      ]
+    },
+    {
+      "id": "VIN2",
+      "features": [
+        {
+          "feature": "ENGINE",
+          "description": {
+            "short": "1.8 Liter V6"
+          }
+        },
+        {
+          "feature": "WHEEL",
+          "description": {
+            "long": "Pirelli P7"
+          }
+        }
+      ]
+    }
+  ]
+}
