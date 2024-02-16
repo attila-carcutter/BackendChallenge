@@ -25,4 +25,4 @@ lint:
 
 .PHONY: run
 run:
-	cli api-server vehicle-features
+	uvicorn --factory --port 8080 --interface wsgi --reload api.create_app:create_app_from_env
