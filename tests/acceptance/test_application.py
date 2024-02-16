@@ -11,11 +11,7 @@ from pytest import fixture
 
 
 def test_server_stores_vehicles_properly(client: Client, clean_workdir: Path, valid_vehicle_features_post: str):
-    response = client.post(
-        url="/backend/challenge",
-        content=valid_vehicle_features_post,
-        headers={"content-type": "application/json"}
-    )
+    response = client.post(url="/backend/challenge", content=valid_vehicle_features_post, headers={"content-type": "application/json"})
 
     assert response.status_code == OK
 

@@ -1,4 +1,4 @@
-SHELL=/bin/bash -e -u -o pipefail
+SHELL=/usr/bin/env bash -e -u -o pipefail
 
 
 .PHONY: format
@@ -12,10 +12,6 @@ unit-test:
 .PHONY: acceptance-test
 acceptance-test:
 	pytest --no-cov tests/acceptance/
-
-.PHONY: coverage
-coverage: unit-test
-	coverage report
 
 dirs := api/ tests/
 .PHONY: lint
