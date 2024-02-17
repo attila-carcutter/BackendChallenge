@@ -12,7 +12,7 @@ class FileVehicleStore(VehicleStore):
         customer_dir = self._base_dir / customer_id
 
         if not customer_dir.exists():
-            customer_dir.mkdir()
+            customer_dir.mkdir(parents=True)
 
         file = customer_dir / f"{vehicle.id}.json"
         file.write_text(vehicle.model_dump_json())

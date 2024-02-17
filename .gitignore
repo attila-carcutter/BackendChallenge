@@ -11,5 +11,6 @@ __pycache__/
 .idea
 .python-version
 .vscode/*.log
+.tmp
 
 nohup.out
