@@ -16,3 +16,6 @@ class FileVehicleStore(VehicleStore):
 
         file = customer_dir / f"{vehicle.id}.json"
         file.write_text(vehicle.model_dump_json())
+
+    def vehicle_exists(self, customer_id: str, vehicle_id: str) -> bool:
+        return (self._base_dir / customer_id / f"{vehicle_id}.json").exists()

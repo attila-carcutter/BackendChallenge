@@ -1,8 +1,11 @@
 import json
 from http.client import OK, BAD_REQUEST
+from unittest.mock import Mock
 
 from flask.testing import FlaskClient
 from pytest import mark
+
+from tests.unit.conftest import MockVehicleStore
 
 PATH = "/backend/challenge"
 
@@ -11,7 +14,7 @@ class TestVehicleFeaturesPost:
     def test_saves_all_vehicles(
         self,
         client: FlaskClient,
-        mock_vehicle_store,
+        mock_vehicle_store: MockVehicleStore,
         valid_vehicle_features_post: str,
     ):
         response = client.post(
@@ -23,7 +26,7 @@ class TestVehicleFeaturesPost:
         assert response.status_code == OK
 
         parsed_request = json.loads(valid_vehicle_features_post)
-        assert mock_vehicle_store.create_vehicle.call_count == len(parsed_request["vehicle"])
+        assert mock_vehicle_store.create_vehicle_.call_count == len(parsed_request["vehicle"])
 
     @mark.parametrize("content_type", ["application/x-www-form-urlencoded", ""])
     def test_returns_bad_request_if_content_type_is_invalid(
@@ -74,3 +77,23 @@ class TestVehicleFeaturesPost:
 
         if not json_error:
             assert error["loc"] == ["vehicle", 1, "features", 1, "description", "short"]
+
+    def test_returns_bad_request_if_vehicle_already_saved(
+        self,
+        client: FlaskClient,
+        mock_vehicle_store,
+        valid_vehicle_features_post: str,
+    ):
+        mock_vehicle_store.exists_ = Mock(return_value=True)
+        response = client.post(
+            PATH,
+            data=valid_vehicle_features_post,
+            headers={"content-type": "application/json; charset=utf-8"},
+        )
+
+        assert response.status_code == BAD_REQUEST
+        response_data = response.json
+        assert response_data
+        assert len(response_data["errors"]) == 2
+        error_1 = response_data["errors"][0]
+        assert error_1["type"] == "already_exists"

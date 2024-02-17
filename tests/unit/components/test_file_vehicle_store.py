@@ -3,12 +3,11 @@ from pathlib import Path
 from pytest import fixture
 
 from api.components.file_vehicle_store import FileVehicleStore
-from api.components.vehicle_store import VehicleStore
 from api.models.vehicle import Vehicle
 
 
 class TestVehicleStore:
-    def test_create_vehicle_stores_the_vehicle_properly(self, clean_workdir: Path, file_vehicle_store):
+    def test_create_vehicle_stores_the_vehicle_properly(self, clean_workdir: Path, file_vehicle_store: FileVehicleStore):
         vehicle = Vehicle.model_validate({
             "id": "vehicle-1",
             "features": [
@@ -31,7 +30,23 @@ class TestVehicleStore:
         stored_vehicle = Vehicle.model_validate_json(stored_content)
         assert stored_vehicle == vehicle
 
+    def test_exists_returns_false_if_vehicle_not_exists(
+        self,
+        clean_workdir: Path,
+        file_vehicle_store: FileVehicleStore,
+    ):
+        assert not file_vehicle_store.vehicle_exists("customer-1", "vehicle-1")
+
+    def test_exists_returns_true_if_vehicle_not_exist(self, clean_workdir: Path, file_vehicle_store: FileVehicleStore):
+        customer_id = "customer_1"
+        customer_dir = clean_workdir / customer_id
+        customer_dir.mkdir()
+        vehicle_id = "vehicle_1"
+        (customer_dir / f"{vehicle_id}.json").touch()
+
+        assert file_vehicle_store.vehicle_exists(customer_id, vehicle_id)
+
 
 @fixture
-def file_vehicle_store(clean_workdir: Path) -> VehicleStore:
+def file_vehicle_store(clean_workdir: Path) -> FileVehicleStore:
     return FileVehicleStore(clean_workdir)
